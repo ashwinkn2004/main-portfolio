@@ -396,6 +396,50 @@ section {
 }
 
 @media(max-width: 1285px) {
+    html {
+        font-size: 55%;
+    }
+
+    .header {
+        padding: 2rem 3%;
+    }
+
+    section {
+        padding: 10rem 3% 2rem;
+    }
+
+    .services {
+        padding-bottom: 7rem;
+    }
+
+    .projects {
+        padding-bottom: 7rem;
+    }
+
+    .contact {
+        min-height: auto;
+    }
+
+    .footer {
+        padding: 2rem 3%;
+    }
+
+    /* Fix footer alignment by using flexbox for centering instead of margins */
+    .footer ul {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 2rem;
+        margin: 2rem 0;
+        padding: 0;
+    }
+
+    .footer ul li {
+        margin-left: 0;
+        /* Reset margin */
+        display: block;
+    }
+
     #menu-icon {
         display: block;
     }
@@ -403,14 +447,19 @@ section {
     .navbar {
         position: absolute;
         top: 100%;
-        right: 0;
-        width: 50%;
-        padding: 1rem 3rem;
-        background: rgba(0, 0, 0, 0.8);
-        border-bottom-left-radius: 2rem;
-        border-left: 2px solid var(--main-color);
-        border-bottom: 2px solid var(--main-color);
+        left: 0;
+        width: 100%;
+        padding: 1rem 3%;
+        background: var(--bg-color);
+        border-top: 1px solid rgba(0, 0, 0, 0.2);
+        box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.1);
         display: none;
+        z-index: 999;
+        /* Ensure it covers other content */
+    }
+
+    .navbar.active {
+        display: block;
     }
 
     .navbar a {
@@ -418,10 +467,17 @@ section {
         font-size: 2rem;
         margin: 3rem 0;
         color: var(--text-color);
+        transform: translateY(-20px);
+        /* Animation start pos */
+        opacity: 0;
+        animation: fadeNav 0.3s ease forwards;
     }
 
-    .navbar.active {
-        display: block;
+    @keyframes fadeNav {
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
     }
 
     .gradient-btn {
@@ -430,6 +486,7 @@ section {
 
     .home {
         flex-direction: column-reverse;
+        /* Image on top (Img is 2nd child, so reverse puts it 1st) */
         margin: 5rem 0;
         gap: 5rem;
     }
@@ -439,13 +496,29 @@ section {
         align-items: center;
     }
 
+    .home-content h1 {
+        font-size: 5rem;
+        /* Reduced from 8rem */
+    }
+
+    .home-content h3 {
+        font-size: 2.5rem;
+        /* Reduced from 4rem */
+    }
+
     .home-img img {
-        width: 56vw;
+        width: 50vw;
+        margin-top: 4rem;
     }
 
     .about {
-        flex-direction: column-reverse;
+        flex-direction: column;
         text-align: center;
+    }
+
+    .about-img img {
+        width: 50vw;
+        margin-top: 4rem;
     }
 
     .about h2 {
@@ -453,12 +526,101 @@ section {
         margin: 2rem 0;
     }
 
-    .about img {
-        width: 52vw;
+    .services-container {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        /* Keep responsive grid */
     }
 
     .contact form {
         flex-direction: column;
+        width: 100%;
+        max-width: 600px;
+        /* Constrain width on tablets */
+        margin: 5rem auto;
+    }
+}
+
+@media(max-width: 991px) {
+
+    /* Tablet specific adjustments if needed, mostly covered by above, but let's refine */
+    .header {
+        padding: 2rem 4%;
     }
 
+    section {
+        padding: 10rem 4% 2rem;
+    }
+}
+
+@media(max-width: 768px) {
+
+    /* Mobile/Small Tablet */
+    html {
+        font-size: 50%;
+    }
+
+    #menu-icon {
+        display: block;
+    }
+
+    .home-img img {
+        width: 55vw;
+    }
+
+    .about-img img {
+        width: 55vw;
+    }
+
+    .services-container {
+        grid-template-columns: 1fr;
+        /* Stack strictly on smaller screens */
+    }
+
+    .contact form .input-group {
+        width: 100%;
+    }
+}
+
+@media(max-width: 617px) {
+    .home-content h1 {
+        font-size: 4rem;
+        /* Further reduce */
+    }
+
+    .home-content h3 {
+        font-size: 2rem;
+    }
+
+    .contact form .input-group {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .input-box input {
+        width: 100%;
+    }
+}
+
+@media(max-width: 450px) {
+    .header {
+        padding: 2rem 3%;
+    }
+
+    html {
+        font-size: 45%;
+    }
+
+    .home-content h1 {
+        font-size: 3.5rem;
+    }
+
+    .contact form .input-group {
+        width: 100%;
+    }
+
+    /* Ensure no horizontal scroll */
+    body {
+        overflow-x: hidden;
+    }
 }
